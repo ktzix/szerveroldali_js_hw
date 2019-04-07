@@ -10,6 +10,8 @@ app.get('/', function(req, res) {
     res.render('/views/index');
 });
 
+
+
 var server = app.listen(3000, function () {
     console.log("listening on 3000");
 });
