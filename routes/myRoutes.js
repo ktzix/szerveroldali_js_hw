@@ -47,7 +47,7 @@ module.exports = function (app) {
 
 
     /**
-     * Delete dog (will redirect to dog after finish)
+     * Delete task (will redirect to /tasks after finish)
      */
     app.use('/dogs/:dogid/delete',
         getDogMW(objectRepository),
