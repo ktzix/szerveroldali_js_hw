@@ -1,15 +1,17 @@
 var requireOption = require('../common/render.js').requireOption;
 
 /**
- *  List all the trainers
+ *
+ *  get the list of the associated dogs
+ *
  */
 module.exports = function (objectrepository) {
 
-    var trainerModel = requireOption(objectrepository, 'trainerModel');
+    var trainerModel = requireOption(objectrepository, 'dogModel');
 
     return function (req, res, next) {
 
-        trainerModel.find({}, function (err, results) {
+        dogModel.find({}, function (err, results) {
             if (err) {
                 return next(err);
             }
@@ -18,8 +20,6 @@ module.exports = function (objectrepository) {
 
             return next();
         });
-
-        return next();
     };
 
 };

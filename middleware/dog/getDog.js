@@ -5,13 +5,19 @@ var requireOption = require('../common/render.js').requireOption;
  */
 module.exports = function (objectrepository) {
 
-    var taskModel = requireOption(objectrepository, 'taskModel');
+    var dogModel = requireOption(objectrepository, 'dogModel');
 
     return function (req, res, next) {
+        dogModel.findOne({
+            _id: req.param('dogid')
+        }, function (err, result) {
+            if ((err) || (!result)) {
+                return res.redirect('/dogs/' + req.param('dogid'));
+            }
 
-        //TODO
-
-        return next();
+            res.dog = result;
+            return next();
+        });
     };
 
 };

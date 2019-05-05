@@ -1,16 +1,15 @@
-const requireOption = require('../common/requireOption');
-var ObjectId = require('mongoose').Schema.Types.ObjectId;
+var requireOption = require('../common/render.js').requireOption;
 
 /**
- *      edits the infos about a dog
+ *
+ *  adds dog to traineddog list
+ *
  */
 module.exports = function (objectrepository) {
 
-    var dogModel = requireOption(objectrepository, 'dogModel');
+    var trainerModel = requireOption(objectrepository, 'trainerModel');
 
     return function (req, res, next) {
-
-
 
         var dog = undefined;
         if (typeof res.dog !== 'undefined') {
@@ -31,6 +30,7 @@ module.exports = function (objectrepository) {
 
             return res.redirect('/dog/' + result.id);
         });
-    };
 
 };
+
+}

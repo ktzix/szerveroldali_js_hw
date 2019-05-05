@@ -1,7 +1,14 @@
+var requireOption = require('../common/render.js').requireOption;
+
 /**
- * Delete the dog object, if its already loaded
+ *
+ *  removes dog from traineddog list
+ *
  */
 module.exports = function (objectrepository) {
+
+    var trainerModel = requireOption(objectrepository, 'trainerModel');
+
     return function (req, res, next) {
 
         if (typeof res.dogs === 'undefined') {

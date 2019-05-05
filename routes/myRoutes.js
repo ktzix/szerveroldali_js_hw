@@ -3,16 +3,13 @@ var renderMW = require('../middleware/common/render.js');
 var delDogMW = require('../middleware/dog/delDog.js');
 var editDogMW = require('../middleware/dog/editDog.js');
 var getDogListMW = require('../middleware/dog/getDogList.js');
-var newDogMW = require('../middleware/dog/newDog.js');
 var getDogMW = require('../middleware/dog/getDog.js');
 
 var getTrainerListMW = require('../middleware/trainer/getTrainerList.js');
 
 module.exports = function (app) {
-    var objectRepository = {
-        dogModel: dogModel,
-        trainerModel: trainermodell
-    };
+
+    const objRepo = {};
 
 
     /**
@@ -20,8 +17,8 @@ module.exports = function (app) {
      */
 
     app.use('/dogs',
-        getDogListMW(objectRepository),
-        renderMW(objectRepository, 'dogs')
+        getDogListMW(objRepo),
+        renderMW(objRepo, 'dogs')
     );
 
 
@@ -30,9 +27,9 @@ module.exports = function (app) {
      */
 
     app.use('/dogs/:dogid/edit',
-        getDogMW(objectRepository),
-        editDogMW(objectRepository),
-        renderMW(objectRepository, 'newdog')
+        getDogMW(objRepo),
+        editDogMW(objRepo),
+        renderMW(objRepo, 'newdog')
     );
 
 
@@ -41,17 +38,17 @@ module.exports = function (app) {
      */
 
     app.use('/dogs/new',
-        newDogMW(objectRepository),
-        renderMW(objectRepository, 'newdog')
+        editDogMW(objRepo),
+        renderMW(objRepo, 'newdog')
     );
 
 
     /**
-     * Delete task (will redirect to /tasks after finish)
+     * delete dog, will redirect to dogs)
      */
     app.use('/dogs/:dogid/delete',
-        getDogMW(objectRepository),
-        delDogMW(objectRepository),
+        getDogMW(objRepo),
+        delDogMW(objRepo),
         function (req, res, next) {
             return res.redirect('/dogs');
         }
@@ -62,9 +59,11 @@ module.exports = function (app) {
      *  list all trainers
      */
     app.use('/trainers',
-        getTrainerListMW(objectRepository),
-        renderMW());
+        getTrainerListMW(objRepo),
+        renderMW(objRepo, 'Oktatok'));
 
-
+    app.use('/',
+        renderMW(objRepo, 'index'));
 
 };
+
