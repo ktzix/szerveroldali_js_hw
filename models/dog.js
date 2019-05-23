@@ -3,16 +3,16 @@ const db = require('../config/db');
 
 const Dog = db.model('Dog', {
 
-    _trainer: {
-        type: Schema.Types.ObjectId,
-        ref: 'Trainer'
 
-    },
     name: String,
     size: String,
     breed: String,
-    colour: Number,
-    age : Number
+    colour: String,
+    age : Number,
+    _trainer: {
+        type: Schema.Types.ObjectId,
+        ref: 'Trainer'
+    },
 
 });
 

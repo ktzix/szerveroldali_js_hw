@@ -41,19 +41,12 @@ module.exports = function (app) {
     );
 
 
-    app.use('/dogs/new',
-        saveDogMw(objRepo),
-        renderMW(objRepo, 'dog_edit')
-    );
 
 
-    /**
-     * delete dog, will redirect to dogs)
-     */
     app.use('/dogs/edit/:dogid',
         getDogMW(objRepo),
         saveDogMw(objRepo),
-        renderMW(objRepo)
+        renderMW(objRepo, 'dog_edit')
     );
 
     app.use('/dogs',
@@ -64,7 +57,7 @@ module.exports = function (app) {
 
 
     app.use('/trainers/add',
-            saveDogMw(objRepo),
+            saveTrainerMW(objRepo),
             renderMW(objRepo, 'trainer_edit')
 
         );
@@ -80,18 +73,13 @@ module.exports = function (app) {
 
 
     app.use('/trainers/edit/:trainerid',
-
             getTrainerMW(objRepo),
             saveTrainerMW(objRepo),
             renderMW(objRepo, 'trainer_edit')
-
     );
 
 
 
-    /**
-     *  list all trainers
-     */
     app.use('/trainers',
         getTrainerListMW(objRepo),
         renderMW(objRepo, 'trainers'));

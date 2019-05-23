@@ -16,24 +16,24 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="name">Kutya neve</label>
-                <input type="text" class="form-control" id="name" placeholder="Dogname" name="name"
+                <input type="text" class="form-control" id="name" placeholder="dogname" name="name"
                        value="<%= (typeof dog !== 'undefined') ? dog.name : '' %>">
             </div>
             <div class="col-*">
                 <label for="size">Méret</label>
-                <input type="text" class="form-control" id="size" placeholder="Dogsize" name="size"
+                <input type="text" class="form-control" id="size" placeholder="dogsize" name="size"
                        value="<%= (typeof dog !== 'undefined') ? dog.size : '' %>">
             </div>
             <div class="col-*">
                 <label for="breed">Fajta</label>
-                <input type="text" class="form-control" id="breed" placeholder="Dogbreed" name="breed"
+                <input type="text" class="form-control" id="breed" placeholder="dogbreed" name="breed"
                        value="<%= (typeof dog !== 'undefined') ? dog.breed : '' %>">
             </div>
         </div>
         <div class="form-row">
             <div class="col-*">
                 <label for="colour">Szín</label>
-                <input type="text" class="form-control" id="colour" placeholder="Dogcolour" name="colour"
+                <input type="text" class="form-control" id="colour" placeholder="dogcolour" name="colour"
                        value="<%= (typeof dog !== 'undefined') ? dog.colour : '' %>">
             </div>
             <div class="col-*">
@@ -42,7 +42,7 @@
                        value="<%= (typeof dog !== 'undefined') ? dog.age : '' %>">
             </div>
             <div class="form-col-*">
-                <label for="trainer">Team</label>
+                <label for="_trainer">Oktato</label>
                 <input type="text" id="_trainer" class="form-control" name ="_trainer"
                        value="<%= (typeof dog !== 'undefined') ? dog._trainer._id : " " %>">
             </div>
@@ -54,7 +54,6 @@
 
         </div>
 
-        <button class="btn btn-primary" type="submit" formaction="/dogs.html">Mentés</button>
     </form>
 
 

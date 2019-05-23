@@ -1,4 +1,6 @@
 <% layout('layout') -%>
+
+<div>
 <h2>
     <% if (typeof trainer === 'undefined') { %>
         new
@@ -6,6 +8,7 @@
         edit
     <% } %>
 </h2>
+</div>
 
 <container>
 
@@ -14,12 +17,12 @@
             <div class="col-md-4 mb-3">
                 <label for="name">name</label>
                 <input type="text" class="form-control" id="name" placeholder="name" name="name"
-                       value="<%= (typeof dog !== 'undefined') ? trainer.name : '' %>">
+                       value="<%= (typeof trainer !== 'undefined') ? trainer.name : '' %>">
             </div>
             <div class="col-md-4 mb-3">
                 <label for="number">number</label>
-                <input type="text" class="form-control" id="nnumberame" placeholder="number" name="number"
-                       value="<%= (typeof dog !== 'undefined') ? trainer.number : '' %>">
+                <input type="text" class="form-control" id="number" placeholder="number" name="number"
+                       value="<%= (typeof trainer !== 'undefined') ? trainer.number : '' %>">
             </div>
 
 

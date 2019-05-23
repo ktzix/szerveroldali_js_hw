@@ -14,6 +14,7 @@ module.exports = function (objectrepository) {
             (typeof req.body.age === 'undefined') ||
             (typeof req.body.colour === 'undefined') ||
             (typeof req.body.breed === 'undefined')){
+
             return next();
         }
 
@@ -26,9 +27,9 @@ module.exports = function (objectrepository) {
         dog.name = req.body.name;
         dog.size = req.body.size;
         dog.age = req.body.age;
-        dog._trainer = req.body._trainer;
         dog.colour =req.body.colour;
         dog.breed = req.body.breed;
+        dog._trainer = req.body._trainer;
 
         dog.save(function (err, result) {
             if (err) {
