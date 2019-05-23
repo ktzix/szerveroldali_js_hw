@@ -29,14 +29,14 @@ module.exports = function (objectrepository) {
         dog.age = req.body.age;
         dog.colour =req.body.colour;
         dog.breed = req.body.breed;
-        dog._trainer = req.body._trainer;
+        dog._trainer = res.tpl.trainer._id;
 
         dog.save(function (err, result) {
             if (err) {
                 return next(err);
             }
 
-            return res.redirect('/dogs');
+            return res.redirect(`/dogs/${res.tpl.trainer._id}`);
         });
 
     };

@@ -25,14 +25,22 @@ module.exports = function (app) {
 
 
 
-    app.use('/dogs/add',
+    app.use('/dogs/:trainerid/add',
+        getTrainerMW(objRepo),
         saveDogMw(objRepo),
         renderMW(objRepo, 'dog_edit')
     );
 
 
+    app.use('/dogs/:trainerid/edit/:dogid',
+        getTrainerMW(objRepo),
+        getDogMW(objRepo),
+        saveDogMw(objRepo),
+        renderMW(objRepo, 'dog_edit')
+    );
 
-    app.use('/dogs/delete/:dogid',
+    app.use('/dogs/:trainerid/delete/:dogid',
+        getTrainerMW(objRepo),
         getDogMW(objRepo),
         delDogMW(objRepo),
         function (req, res, next) {
@@ -40,16 +48,8 @@ module.exports = function (app) {
         }
     );
 
-
-
-
-    app.use('/dogs/edit/:dogid',
-        getDogMW(objRepo),
-        saveDogMw(objRepo),
-        renderMW(objRepo, 'dog_edit')
-    );
-
-    app.use('/dogs',
+    app.use('/dogs/:trainerid',
+            getTrainerMW(objRepo),
             getDogListMW(objRepo),
             renderMW(objRepo, 'dogs')
         );
@@ -63,26 +63,27 @@ module.exports = function (app) {
         );
 
 
-    app.use('/trainers/delete/:trainerid',
-            getTrainerMW(objRepo),
-            delTrainerMW(objRepo),
-        function (req, res, next) {
-            return res.redirect('/trainers');
-                                 }
-        );
-
-
     app.use('/trainers/edit/:trainerid',
             getTrainerMW(objRepo),
             saveTrainerMW(objRepo),
             renderMW(objRepo, 'trainer_edit')
     );
 
+    app.use('/trainers/delete/:trainerid',
+        getTrainerMW(objRepo),
+        delTrainerMW(objRepo),
+        function (req, res, next) {
+            return res.redirect('/trainers');
+        }
+    );
+
+
 
 
     app.use('/trainers',
         getTrainerListMW(objRepo),
         renderMW(objRepo, 'trainers'));
+
 
 
     app.use('/',

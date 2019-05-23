@@ -15,7 +15,7 @@ module.exports = function (objectrepository) {
                 return next(err);
             }
 
-            return next();
+            return res.redirect(`/dogs/${res.tpl.trainer._id}`);
         });
 
     };

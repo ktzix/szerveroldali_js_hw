@@ -11,15 +11,18 @@ module.exports = function (objectrepository) {
     var dogModel = requireOption(objectrepository, 'dogModel');
 
     return function (req, res, next) {
+        dogModel.findOne(
+            {
+                _id: req.params.dogid
+            },
+            (err, dog) => {
+                if (err || !dog) {
+                    return next(err);
+                }
 
-        dogModel.findOne({
-            _id: req.param('dogid')
-        }).populate('_trainer').exec(function (err, result) {
-            if ((err) || (!result)) {
-                return res.redirect('/dogs');
+                res.tpl.dog = dog;
+                return next();
             }
-            res.tpl.dog = result;
-            return next();
-        });
+        );
     };
 };
