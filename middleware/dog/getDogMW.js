@@ -1,21 +1,21 @@
-var requireOption = require('../common/render.js').requireOption;
+const requireOption = require('../common/requireOption');
 
 /**
  *      lists all the dogs to a specific trainer
  */
 module.exports = function (objectrepository) {
 
-    var dogModel = requireOption(objectrepository, 'dogModel');
+    const DogModel = requireOption(objectrepository, 'DogModel');
 
     return function (req, res, next) {
-        dogModel.findOne({
-            _id: req.param('dogid')
+        DogModel.findOne({
+            _id: req.params.dogid
         }, function (err, result) {
             if ((err) || (!result)) {
                 return res.redirect('/dogs/' + req.param('dogid'));
             }
 
-            res.dog = result;
+            res.locals.dog = result;
             return next();
         });
     };

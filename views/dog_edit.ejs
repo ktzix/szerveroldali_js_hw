@@ -5,30 +5,30 @@
     <form method="POST">
         <div class="form-row">
             <div class="col-md-4 mb-3">
-                <label for="dogname">Kutya neve</label>
-                <input type="text" class="form-control" id="dogname" placeholder="Dogname" name="name"
+                <label for="name">Kutya neve</label>
+                <input type="text" class="form-control" id="name" placeholder="Dogname" name="name"
                        value="<%= (typeof dog !== 'undefined') ? dog.name : '' %>">
             </div>
             <div class="col-*">
-                <label for="dogsize">Méret</label>
-                <input type="text" class="form-control" id="dogsize" placeholder="Dogsize" name="size"
+                <label for="size">Méret</label>
+                <input type="text" class="form-control" id="size" placeholder="Dogsize" name="size"
                        value="<%= (typeof dog !== 'undefined') ? dog.size : '' %>">
             </div>
             <div class="col-*">
-                <label for="dogbreed">Fajta</label>
-                <input type="text" class="form-control" id="dogbreed" placeholder="Dogbreed" name="breed"
+                <label for="breed">Fajta</label>
+                <input type="text" class="form-control" id="breed" placeholder="Dogbreed" name="breed"
                        value="<%= (typeof dog !== 'undefined') ? dog.breed : '' %>">
             </div>
         </div>
         <div class="form-row">
             <div class="col-*">
-                <label for="dogcolour">Szín</label>
-                <input type="text" class="form-control" id="dogcolour" placeholder="Dogcolour" name="colour"
+                <label for="colour">Szín</label>
+                <input type="text" class="form-control" id="colour" placeholder="Dogcolour" name="colour"
                        value="<%= (typeof dog !== 'undefined') ? dog.colour : '' %>">
             </div>
             <div class="col-*">
-                <label for="dogage">Életkora</label>
-                <input type="number" class="form-control" id="dogage" placeholder="Dogage" name="age"
+                <label for="age">Életkora</label>
+                <input type="number" class="form-control" id="age" placeholder="Dogage" name="age"
                        value="<%= (typeof dog !== 'undefined') ? dog.age : '' %>">
             </div>
 
@@ -36,5 +36,6 @@
 
         <button class="btn btn-primary" type="submit" formaction="/dogs.html">Mentés</button>
     </form>
+
 
 </container>
