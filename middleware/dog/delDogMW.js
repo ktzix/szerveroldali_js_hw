@@ -1,21 +1,22 @@
-/**
- * Delete the dog object, if its already loaded
- */
+var requireOption = require('../common/requireOption').requireOption;
+
+
+
 module.exports = function (objectrepository) {
     return function (req, res, next) {
 
-        if (typeof res.dogs === 'undefined') {
+        if (typeof res.tpl.dog === 'undefined') {
+            console.log("error: undefined");
             return next();
         }
 
-        res.task.remove(function (err) {
+        res.tpl.dog.remove(function (err) {
             if (err) {
                 return next(err);
             }
 
-            //redirect to all tasks
-            res.redirect('/dogs/');
+            return next();
         });
-    };
 
+    };
 };

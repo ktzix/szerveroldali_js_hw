@@ -4,7 +4,7 @@ var db = require('../config/db');
 
 var Trainer = db.model('Trainer', {
     name: String,
-    id: String,
+    number: String,
 
 });
 

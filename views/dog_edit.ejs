@@ -1,5 +1,15 @@
 <% layout('layout') -%>
 
+<h2>
+    <% if (typeof dog === 'undefined') { %>
+        new
+    <% }else{ %>
+        edit
+    <% } %>
+</h2>
+
+
+
 <container>
 
     <form method="POST">
@@ -30,6 +40,16 @@
                 <label for="age">Életkora</label>
                 <input type="number" class="form-control" id="age" placeholder="Dogage" name="age"
                        value="<%= (typeof dog !== 'undefined') ? dog.age : '' %>">
+            </div>
+            <div class="form-col-*">
+                <label for="trainer">Team</label>
+                <input type="text" id="_trainer" class="form-control" name ="_trainer"
+                       value="<%= (typeof dog !== 'undefined') ? dog._trainer._id : " " %>">
+            </div>
+
+            <div class="form-group" >
+                <input type="submit" class="btn btn-primary" value="Save"/>
+                <a href="/dogs" class="btn btn-default">Cancel</a>
             </div>
 
         </div>

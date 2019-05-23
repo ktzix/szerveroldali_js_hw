@@ -1,52 +1,38 @@
-var renderMW = require('../middleware/common/render.js');
+var renderMW = require('../middleware/common/renderMW.js');
 
-var delDogMW = require('../middleware/dog/delDog.js');
-var editDogMW = require('../middleware/dog/editDog.js');
-var getDogListMW = require('../middleware/dog/getDogList.js');
-var getDogMW = require('../middleware/dog/getDog.js');
+var delDogMW = require('../middleware/dog/delDogMW.js');
+var saveDogMw = require('../middleware/dog/saveDogMW.js');
+var getDogListMW = require('../middleware/dog/getDogListMW.js');
+var getDogMW = require('../middleware/dog/getDogMW.js');
 
-var getTrainerListMW = require('../middleware/trainer/getTrainerList.js');
+var getTrainerListMW = require('../middleware/trainer/getTrainerListMW.js');
+var getTrainerMW = require('../middleware/trainer/getTrainerMW.js');
+var delTrainerMW = require('../middleware/trainer/delTrainerMW.js');
+var saveTrainerMW = require('../middleware/trainer/saveTrainerMW.js');
+
+const dogModel =require('../models/dog');
+const trainerModel =require('../models/trainer');
+
+
 
 module.exports = function (app) {
 
-    const objRepo = {};
+    const objRepo = {
+        dogModel: dogModel,
+        trainerModel: trainerModel
+    };
 
 
-    /**
-     *  List all dogs
-     */
 
-    app.use('/dogs',
-        getDogListMW(objRepo),
-        renderMW(objRepo, 'dogs')
+
+    app.use('/dogs/add',
+        saveDogMw(objRepo),
+        renderMW(objRepo, 'dog_edit')
     );
 
 
-    /**
-     *      Edit a dog
-     */
 
-    app.use('/dogs/:dogid/edit',
-        getDogMW(objRepo),
-        editDogMW(objRepo),
-        renderMW(objRepo, 'newdog')
-    );
-
-
-    /**
-     *      Add a new dog
-     */
-
-    app.use('/dogs/new',
-        editDogMW(objRepo),
-        renderMW(objRepo, 'newdog')
-    );
-
-
-    /**
-     * delete dog, will redirect to dogs)
-     */
-    app.use('/dogs/:dogid/delete',
+    app.use('/dogs/delete/:dogid',
         getDogMW(objRepo),
         delDogMW(objRepo),
         function (req, res, next) {
@@ -55,12 +41,61 @@ module.exports = function (app) {
     );
 
 
+    app.use('/dogs/new',
+        saveDogMw(objRepo),
+        renderMW(objRepo, 'dog_edit')
+    );
+
+
+    /**
+     * delete dog, will redirect to dogs)
+     */
+    app.use('/dogs/edit/:dogid',
+        getDogMW(objRepo),
+        saveDogMw(objRepo),
+        renderMW(objRepo)
+    );
+
+    app.use('/dogs',
+            getDogListMW(objRepo),
+            renderMW(objRepo, 'dogs')
+        );
+
+
+
+    app.use('/trainers/add',
+            saveDogMw(objRepo),
+            renderMW(objRepo, 'trainer_edit')
+
+        );
+
+
+    app.use('/trainers/delete/:trainerid',
+            getTrainerMW(objRepo),
+            delTrainerMW(objRepo),
+        function (req, res, next) {
+            return res.redirect('/trainers');
+                                 }
+        );
+
+
+    app.use('/trainers/edit/:trainerid',
+
+            getTrainerMW(objRepo),
+            saveTrainerMW(objRepo),
+            renderMW(objRepo, 'trainer_edit')
+
+    );
+
+
+
     /**
      *  list all trainers
      */
     app.use('/trainers',
         getTrainerListMW(objRepo),
-        renderMW(objRepo, 'Oktatok'));
+        renderMW(objRepo, 'trainers'));
+
 
     app.use('/',
         renderMW(objRepo, 'index'));

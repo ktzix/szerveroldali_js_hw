@@ -1,25 +1,23 @@
-var requireOption = require('../common/render.js').requireOption;
+var requireOption = require('../common/requireOption').requireOption;
 
-/**
- *  List all the trainers
- */
+
+
 module.exports = function (objectrepository) {
 
     var trainerModel = requireOption(objectrepository, 'trainerModel');
 
     return function (req, res, next) {
 
-        trainerModel.find({}, function (err, results) {
+        trainerModel.find({
+
+        }).exec(function (err, results) {
             if (err) {
-                return next(err);
+                return next(new Error('Error getting trainers'));
             }
 
-            res.dogs = results;
-
+            res.tpl.trainer = results;
             return next();
         });
-
-        return next();
     };
 
 };

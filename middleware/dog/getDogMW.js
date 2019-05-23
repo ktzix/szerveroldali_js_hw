@@ -1,23 +1,25 @@
-const requireOption = require('../common/requireOption');
+var requireOption = require('../common/requireOption').requireOption;
 
 /**
- *      lists all the dogs to a specific trainer
+ * Get the employee for the playerid param
+ *  - if there is no such player, redirect to /players
+ *  - if there is one, put it on res.tpl.player
  */
+
 module.exports = function (objectrepository) {
 
-    const DogModel = requireOption(objectrepository, 'DogModel');
+    var dogModel = requireOption(objectrepository, 'dogModel');
 
     return function (req, res, next) {
-        DogModel.findOne({
-            _id: req.params.dogid
-        }, function (err, result) {
-            if ((err) || (!result)) {
-                return res.redirect('/dogs/' + req.param('dogid'));
-            }
 
-            res.locals.dog = result;
+        dogModel.findOne({
+            _id: req.param('dogid')
+        }).populate('_trainer').exec(function (err, result) {
+            if ((err) || (!result)) {
+                return res.redirect('/dogs');
+            }
+            res.tpl.dog = result;
             return next();
         });
     };
-
 };

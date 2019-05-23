@@ -1,27 +1,33 @@
-const requireOption = require('../common/requireOption');
-var ObjectId = require('mongoose').Schema.Types.ObjectId;
+var requireOption = require('../common/requireOption').requireOption;
 
-/**
- *      edits the infos about a dog
- */
+
+
 module.exports = function (objectrepository) {
 
     var dogModel = requireOption(objectrepository, 'dogModel');
 
     return function (req, res, next) {
 
-
+        if ((typeof req.body.name === 'undefined') ||
+            (typeof req.body._trainer === 'undefined') ||
+            (typeof req.body.size === 'undefined') ||
+            (typeof req.body.age === 'undefined') ||
+            (typeof req.body.colour === 'undefined') ||
+            (typeof req.body.breed === 'undefined')){
+            return next();
+        }
 
         var dog = undefined;
-        if (typeof res.dog !== 'undefined') {
-            dog = res.dog;
+        if (typeof res.tpl.dog !== 'undefined') {
+            dog = res.tpl.dog;
         } else {
             dog = new dogModel();
         }
         dog.name = req.body.name;
         dog.size = req.body.size;
-        dog.colour = req.body.colour;
         dog.age = req.body.age;
+        dog._trainer = req.body._trainer;
+        dog.colour =req.body.colour;
         dog.breed = req.body.breed;
 
         dog.save(function (err, result) {
@@ -29,8 +35,9 @@ module.exports = function (objectrepository) {
                 return next(err);
             }
 
-            return res.redirect('/dog/' + result.id);
+            return res.redirect('/dogs');
         });
+
     };
 
 };

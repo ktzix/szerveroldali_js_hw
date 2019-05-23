@@ -3,34 +3,36 @@
 
 <div class="container">
     <caption >
-        <h3 style="display: inline-block">No Dénes</h3>
-        <a href="newDog.html" style="display: inline-block"> <i class="fas fa-plus-circle fa-2x" style="float: right" ></i></a>
+        <h3 style="display: inline-block">Dogs</h3>
+        <a href="/dogs/add" style="display: inline-block"> <i class="fas fa-plus-circle fa-2x" style="float: right" ></i></a>
     </caption>
     <table class="table table-bordered table-hover">
 
 
         <thead class="thead-light">
         <tr>
-            <th scope="col">Kutya Neve</th>
-            <th scope="col">Méret</th>
-            <th scope="col">Fajta</th>
-            <th scope="col">Szín</th>
-            <th scope="col">Életkor</th>
+            <th scope="col">Name</th>
+            <th scope="col">Size</th>
+            <th scope="col">Breed</th>
+            <th scope="col">Colour</th>
+            <th scope="col">Age</th>
+            <th scope="col">Trainer</th>
             <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
 
-        <% dogs.forEach(function(item){ %>
+        <% dog.forEach(function(oneDog){ %>
         <tr>
-            <td>  <%= item.name %></td>
-            <td> <%= item.size %></td>
-            <td> <%= item.breed %></td>
-            <td> <%= item.colour %></td>
-            <td> <%= item.age %></td>
+            <td>  <%= oneDog.name %></td>
+            <td> <%= oneDog.size %></td>
+            <td> <%= oneDog.breed %></td>
+            <td> <%= oneDog.colour %></td>
+            <td> <%= oneDog.age %></td>
+            <td> <%= oneDog._trainer %></td>
             <td>
-                <span onclick="trashClicked()"><i class="far fa-trash-alt " ></i></span>
-                <a href="editDog.html"><i class="far fa-edit"></i> </a>
+                <a href="/dogs/edit/<%= oneDog._id%>" class="btn btn-sm btn-primary" role="button">Edit</a>
+                <a href="/dogs/delete/<%=oneDog._id%>" class="btn btn-sm btn-danger" role="button">Delete</a>
             </td>
         </tr>
         <% }); %>
@@ -38,9 +40,3 @@
         </tbody>
     </table>
 </div>
-
-<script>
-    function trashClicked() {
-        alert("Biztos törlöd az elemet?");
-    }
-</script>

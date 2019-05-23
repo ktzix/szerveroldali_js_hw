@@ -2,8 +2,6 @@
 
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 100px">
-        <a class="navbar-brand" href="/index.html">Főoldal</a>
-        <a class="navbar-brand" href="/trainers.html">Oktatók</a>
     </nav>
 </div>
 
@@ -11,23 +9,33 @@
     <table class="table table-bordered">
         <thead class="thead-light">
         <tr>
-            <th scope="col">Név</th>
-            <th scope="col">Kor</th>
-            <th scope="col">Azonosító</th>
-            <th scope="col">Kutyái</th>
+            <th scope="col">name</th>
+            <th scope="col">number</th>
+            <th scope="col">dogs</th>
+            <th scope="col">misc</th>
         </tr>
         </thead>
         <tbody>
-
+        <% trainer.forEach(function (oneTrainer) { %>
         <tr>
-            <td>No Dénes</td>
-            <td>36</td>
-            <td>asd123</td>
+            <td><%= oneTrainer.name %></td>
+            <td><%= oneTrainer.number %></td>
             <td>
-                <a href="dogs.html">Jelenleg oktatott kutyák</a>
+                <a href="/dogs">Oktatott kutyák</a>
+
+            </td>
+            <td>
+                <a href="/trainers/edit/<%=oneTrainer._id%>" class="btn btn-sm btn-primary" role="button">Edit</a>
+                <a href="/trainers/delete/<%=oneTrainer._id%>" class="btn btn-sm btn-danger" role="button">Delete</a>
+
             </td>
         </tr>
 
         </tbody>
+        <% });%>
     </table>
+    <div class="text-center">
+        <a href="/trainers/add" class="btn btn-lg btn-primary" role="button">Add Trainer</a>
+    </div>
+
 </div>
